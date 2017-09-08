@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+{{> /include/header}}
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+	{{> /include/navigation}}
+	<div class="container" id="main">
+		<h2>게시판</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>NO</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>조회수</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="board : ${boardList}">
+					<td th:text="${board.seq}"></td>
+					<td><a href="" th:href="@{'/board/read/' + ${board.seq}}" th:text="${board.title}"></a></td>
+					<td th:text="${board.writer}"></td>
+					<td th:text="${board.regDate}"></td>
+					<td th:text="${board.cnt}"></td>
+				</tr>
+			</tbody>
+		</table>
+		<a href="/board/form" class="btn btn-info pull-right" role="button">새글</a>
+	</div>
+
+	
+</body>
+</html>
