@@ -91,7 +91,7 @@ public class UserController {
 		User user = userRepository.findByUserId(userId);
 		
 		if(user == null || !password.equals(user.getPassword())){
-			System.out.println("로그인 실패");
+			System.out.println("로그인에 실패했습니다.");
 			return "redirect:/user/loginForm";
 		}		
 		session.setAttribute(HttpSessionUtils.USER_SESSION_KEY, user);		
