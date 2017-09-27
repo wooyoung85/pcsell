@@ -7,6 +7,7 @@ import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,6 +28,7 @@ public class Question {
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_question_writer"))
 	private User writer;
 	private String title;
+	@Lob
 	private String contents;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createDate;
@@ -45,5 +47,9 @@ public class Question {
 	public void update(String title, String contents) {
 		this.title = title;
 		this.contents = contents;		
+	}
+
+	public boolean isSameWriter(User loginUser) {
+		return this.writer.equals(loginUser);
 	}
 }

@@ -1,54 +1,30 @@
-<nav class="navbar navbar-fixed-top header">
-	<div class="col-md-12">
+<nav class="navbar navbar-default">
+	<div class="container">
+		<!-- Brand and toggle get grouped for better mobile display -->
 		<div class="navbar-header">
-
-			<a href="/" class="navbar-brand">PC Sell</a>
-			<button type="button" class="navbar-toggle" data-toggle="collapse"
-				data-target="#navbar-collapse1">
-				<i class="glyphicon glyphicon-search"></i>
+			<button type="button" class="navbar-toggle collapsed"
+				data-toggle="collapse" data-target="#bs-navbar-collapse" aria-expanded="false">
+				<span class="sr-only"></span> 
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
 			</button>
-
+			<a class="navbar-brand" href="/">PC SELL</a>
 		</div>
-		<div class="collapse navbar-collapse" id="navbar-collapse1">
-			<form class="navbar-form pull-left">
-				<div class="input-group" style="max-width: 470px;">
-					<input type="text" class="form-control" placeholder="Search"
-						name="srch-term" id="srch-term">
-					<div class="input-group-btn">
-						<button class="btn btn-default btn-primary" type="submit">
-							<i class="glyphicon glyphicon-search"></i>
-						</button>
-					</div>
-				</div>
-			</form>
+		<div class="collapse navbar-collapse" id="bs-navbar-collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-						class="glyphicon glyphicon-bell"></i></a>
-					<ul class="dropdown-menu">
-						<li><a href="https://slipp.net" target="_blank">SLiPP</a></li>
-						<li><a href="https://facebook.com" target="_blank">Facebook</a></li>
-					</ul></li>
-				<li><a href="/user"><i class="glyphicon glyphicon-user"></i></a></li>
+				<li><a href="/#about">신청안내</a></li>
+				<li><a href="/#portfolio">PC</a></li> 
+			{{^sessionedUser}}
+				<li><a href="/user/loginForm" role="button">로그인</a></li>
+				<li><a href="/user/form" role="button">회원가입</a></li>
+			{{/sessionedUser}} 
+			{{#sessionedUser}}
+				<li><a href="/question">문의하기</a></li>
+				<li><a href="/user/logout">로그아웃</a></li>
+				<li><a href="/user/{{id}}/form">개인정보수정</a></li> 
+			{{/sessionedUser}}
 			</ul>
 		</div>
 	</div>
 </nav>
-<div class="navbar navbar-default" id="subnav">
-	<div class="col-md-12">
-
-		<div class="collapse navbar-collapse" id="navbar-collapse2">
-			<ul class="nav navbar-nav navbar-left">
-				{{#sessionedUser}}
-				<li><a href="/board">Posts</a></li>{{/sessionedUser}}
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				{{^sessionedUser}}
-				<li><a href="/user/loginForm" role="button">로그인</a></li>
-				<li><a href="/user/form" role="button">회원가입</a></li> {{/sessionedUser}}
-				{{#sessionedUser}}
-				<li><a href="/user/logout">로그아웃</a></li>
-				<li><a href="/user/{{id}}/form">개인정보수정</a></li> {{/sessionedUser}}
-			</ul>     
-		</div>
-	</div>
-</div>
