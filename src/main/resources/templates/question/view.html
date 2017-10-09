@@ -25,28 +25,34 @@
 									class="icon-link"></i></a>
 							</div>
 						</div>
-						<div class="article-doc">{{contents}}</div>
+						<div class="article-doc">{{{contents}}}</div>
+						<hr/>
 						<div class="article-util">
 							<ul class="article-util-list">
-								<li><a class="link-modify-article"
-									href="/question/{{id}}/form">수정</a></li>
 								<li>
-									<form class="form-delete" action="/question/{{id}}"
-										method="POST">
-										<input type="hidden" name="_method" value="DELETE">
-										<button class="link-delete-article" type="submit">삭제</button>
-									</form>
+									<a class="btn btn-sm btn-success pull-right" href="/question/{{id}}/form">수정</a>
 								</li>
-								<li><a class="link-modify-article"
-									href="/question/{{id}}/form">수정</a></li>
 								<li>
+									<form class="form-delete" action="/question/{{id}}"	method="POST">
+										<input type="hidden" name="_method" value="DELETE">
+										<button class="btn btn-sm btn-danger pull-right" type="submit">삭제</button>
+									</form>
+								</li>								
 							</ul>
 						</div>
 					</article>
+					<form class="submit-write" method="post" action="/question/{{id}}/answer">
+						<div class="form-group" style="padding:14px;margin-bottom:30px">
+							<textarea class="form-control" name="contents" placeholder="답변 작성"></textarea>
+							<input type="submit" class="btn btn-sm btn-primary pull-right" value="답변하기" />
+						</div>						
+						<div class="clearfix" />
+					</form>
 				</div>
 				{{/question}}
 			</div>
 		</div>
 	</div>
+	{{> /include/footer}}
 </body>
 </html>

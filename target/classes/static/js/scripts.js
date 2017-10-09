@@ -7,3 +7,7 @@ String.prototype.format = function() {
         ;
   });
 };
+
+$('.edit').trumbowyg({
+    lang: 'fr'
+});

@@ -9,9 +9,9 @@ public interface QuestionService {
 
 	public abstract boolean delete(Long id);
 
-	public abstract void update(Long id, Question updatedUser);
+	public abstract void update(Long id, Question updatedQuestion);
 
-	public abstract void create(Question user);
+	public abstract void create(Question question);
 
 	public abstract Question view(Long id);
 }
