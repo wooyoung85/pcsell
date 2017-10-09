@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: pcsell
 Implementation-Version: 1.0
-Built-By: 08408
+Built-By: Y
 Implementation-Vendor-Id: com.pcsell
-Build-Jdk: 1.8.0_131
+Build-Jdk: 1.8.0_144
 Implementation-URL: http://projects.spring.io/spring-boot/pcsell/
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
