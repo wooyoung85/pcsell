@@ -3,6 +3,7 @@ package com.pcsell.question.domain;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -23,11 +24,11 @@ public class Answer {
 	@GeneratedValue
 	private Long Id;
 
-	@ManyToOne
-	@JoinColumn(foreignKey = @ForeignKey(name = "fk_answer_writer"))
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(foreignKey = @ForeignKey(name = "fk_answer_writer"))	
 	private User writer;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_answer_to_question"))
 	private Question question;
 

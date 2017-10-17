@@ -41,13 +41,53 @@
 							</ul>
 						</div>
 					</article>
-					<form class="submit-write" method="post" action="/question/{{id}}/answer">
-						<div class="form-group" style="padding:14px;margin-bottom:30px">
-							<textarea class="form-control" name="contents" placeholder="답변 작성"></textarea>
-							<input type="submit" class="btn btn-sm btn-primary pull-right" value="답변하기" />
-						</div>						
-						<div class="clearfix" />
-					</form>
+					<div class="qna-comment">
+						<div class="qna-comment-slipp">
+							<p class="qna-comment-count text-right"><strong>2</strong>개 의견</p>							
+							<div class="qna-comment-slipp-articles">
+							{{#answers}}
+								<article class="article">
+									<div class="article-header">
+										<div class="article-header-thumb">
+											<img src="/images/user/{{writer.id}}.jpg" class="article-author-thumb" />
+										</div>
+										<div class="article-header-text">
+											<a href="" class="article-author-name">{{writer.userId}}</a>
+											<a href="" class="article-header-time">{{createDate}}</a>
+										</div>
+									</div>
+									<div class="article-doc comment-doc">
+										<p>{{contents}}</p>
+									</div>
+									<div class="article-util">
+										<ul class="article-util-list">
+											<li>
+												<a class="link-modify-article" href="">수정</a>
+												<input class="hdQuestionId" type="hidden" value={{question.id}} />
+												<input class="hdId" type="hidden" value={{id}} />
+												<input class="hdContents" type="hidden" value={{contents}} />
+											</li>
+											<li>
+												<a class="link-delete-article" href="/api/question/{{question.id}}/answer/{{id}}">삭제</a>
+											</li>
+										</ul>
+									</div>
+								</article>
+								{{/answers}}
+								<div class="answer-edit">
+									<form name="answer" class="answer-write" method="post" action="/api/question/{{id}}/answer">
+										<div class="form-group" style="padding: 14px; margin-bottom: 30px">
+											<textarea id="txtAnswerContents" class="form-control" name="contents" placeholder="답변 작성"></textarea>
+											<input type="submit" class="btn btn-sm btn-primary pull-right" value="답변하기" />
+										</div>
+										<div class="clearfix" />
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					
 				</div>
 				{{/question}}
 			</div>
@@ -56,3 +96,39 @@
 	{{> /include/footer}}
 </body>
 </html>
+<script type="text/template" id="updateAnswerTemplate">
+	<form name="answer" class="answer-write" method="post" action="/api/question/{0}/updateAnswer/{1}">
+		<div class="form-group" style="padding: 14px; margin-bottom: 30px">
+			<textarea id="txtAnswerContents" class="form-control" name="contents">{2}</textarea>
+			<input type="submit" class="btn btn-sm btn-primary pull-right" value="수정하기" />
+		</div>
+		<div class="clearfix" />
+	</form>
+</script>
+
+<script type="text/template" id="answerTemplate">
+	<article class="article">
+		<div class="article-header">
+			<div class="article-header-thumb">
+				<img src="/images/user/{0}.jpg" class="article-author-thumb" alt="">
+			</div>
+			<div class="article-header-text">
+				<a href="#" class="article-author-name">{1}</a>
+				<div class="article-header-time">{2}</div>
+			</div>
+		</div>
+		<div class="article-doc comment-doc">
+			{3}
+		</div>
+		<div class="article-util">
+		<ul class="article-util-list">
+			<li>
+				<a class="link-modify-article" href="/api/question/{4}/updateAnswer/{5}">수정</a>
+			</li>
+			<li>
+				<a class="link-delete-article" onclick="delAnswer(this, '/api/question/{4}/answer/{5}')" href="">삭제</a>
+			</li>
+		</ul>
+		</div>
+	</article>
+</script>

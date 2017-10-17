@@ -1,17 +1,22 @@
 package com.pcsell.question.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.pcsell.user.domain.User;
 
 import lombok.Data;
@@ -27,12 +32,20 @@ public class Question {
 	@ManyToOne
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_question_writer"))
 	private User writer;
+	
 	private String title;
+	
 	@Lob
 	private String contents;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createDate;
 
+	@OneToMany(mappedBy="question", fetch = FetchType.LAZY)
+	@OrderBy("id ASC")
+	@JsonIgnore
+	private List<Answer> answers;
+	
 	public Question() {
 	}
 
