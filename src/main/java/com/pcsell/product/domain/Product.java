@@ -19,17 +19,19 @@ public class Product {
 	private String productId;
 	private String productName;
 	private Long productPrice;
+	private int productStock;
 	//PC 스펙값 추가 필요
 	
 	public Product(){
 		
 	}
 	
-	public Product(String productID, String productName, Long productPrice){
+	public Product(String productID, String productName, Long productPrice, int productStock){
 		super();
 		this.productId = productID;
 		this.productName = productName;
 		this.productPrice = productPrice;
+		this.productStock = productStock;
 	}
 	
 
