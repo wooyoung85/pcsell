@@ -13,23 +13,23 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pcsell.question.domain.Question;
-import com.pcsell.question.repository.QuestionRepository;
-import com.pcsell.user.domain.User;
+import com.pcsell.question.service.QuestionService;
 import com.pcsell.user.domain.Result;
+import com.pcsell.user.domain.User;
 import com.pcsell.util.HttpSessionUtils;
 
 @Controller
 @RequestMapping("question")
 public class QuestionController {
 	@Autowired
-	private QuestionRepository questionRepository;
-	
+	private QuestionService questionService;
+
 	@GetMapping("")
 	public String List(Model model, HttpSession session) {
 		if (!HttpSessionUtils.isLoginUser(session)) {
 			return "/user/login";
 		}
-		model.addAttribute("questions", questionRepository.findAll());
+		model.addAttribute("questions", questionService.list());
 		return "/question/list";
 	}
 
@@ -46,9 +46,10 @@ public class QuestionController {
 		if (!HttpSessionUtils.isLoginUser(session)) {
 			return "/user/login";
 		}
+		System.out.println("contents : "+contents);
 		User sessionedUser = HttpSessionUtils.getUserFromSession(session);
 		Question newQuestion = new Question(sessionedUser, title, contents);
-		questionRepository.save(newQuestion);
+		questionService.create(newQuestion);
 		return String.format("redirect:/question/%d", newQuestion.getId());
 	}
 
@@ -57,12 +58,12 @@ public class QuestionController {
 		if (!HttpSessionUtils.isLoginUser(session)) {
 			return "/user/login";
 		}
-		model.addAttribute("question", questionRepository.findOne(id));		
+		model.addAttribute("question", questionService.findOne(id));
 		return "/question/view";
 	}
-	
-	private Result valid(HttpSession session, Question question){
-		if(!HttpSessionUtils.isLoginUser(session)){
+
+	private Result valid(HttpSession session, Question question) {
+		if (!HttpSessionUtils.isLoginUser(session)) {
 			return Result.fail("로그인이 필요합니다.");
 		}
 		User logindUser = HttpSessionUtils.getUserFromSession(session);
@@ -70,42 +71,43 @@ public class QuestionController {
 			return Result.fail("자신이 쓴 글만 수정, 삭제가 가능합니다.");
 		}
 		return Result.ok();
-	}	
+	}
 
 	@GetMapping("/{id}/form")
 	public String updateForm(@PathVariable Long id, Model model, HttpSession session) {
-		Question question = questionRepository.findOne(id);
+		Question question = questionService.findOne(id);
 		Result validationResult = valid(session, question);
-		if(!validationResult.isValid()){
+		if (!validationResult.isValid()) {
 			model.addAttribute("errorMessage", validationResult.getErrorMessage());
 			return "/user/login";
 		}
 		model.addAttribute("question", question);
 		return "/question/updateForm";
-	}	
-	
+	}
+
 	@PutMapping("/{id}")
 	public String update(@PathVariable Long id, String title, String contents, Model model, HttpSession session) {
-		Question question = questionRepository.findOne(id);
+		Question question = questionService.findOne(id);
 		Result validationResult = valid(session, question);
-		if(!validationResult.isValid()){
+		if (!validationResult.isValid()) {
 			model.addAttribute("errorMessage", validationResult.getErrorMessage());
 			return "/user/login";
-		}		
+		}
+		System.out.println("contents : "+contents);
 		question.update(title, contents);
-		questionRepository.save(question);
+		questionService.create(question);
 		return String.format("redirect:/question/%d", id);
 	}
 
 	@DeleteMapping("/{id}")
 	public String delete(@PathVariable Long id, Model model, HttpSession session) {
-		Question question = questionRepository.findOne(id);
+		Question question = questionService.findOne(id);
 		Result validationResult = valid(session, question);
-		if(!validationResult.isValid()){
+		if (!validationResult.isValid()) {
 			model.addAttribute("errorMessage", validationResult.getErrorMessage());
 			return "/user/login";
-		}		
-		questionRepository.delete(id);
+		}
+		questionService.delete(id);
 		return "redirect:/";
 	}
 }

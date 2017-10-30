@@ -13,5 +13,5 @@ public interface QuestionService {
 
 	public abstract void create(Question question);
 
-	public abstract Question view(Long id);
+	public abstract Question findOne(Long id);
 }

@@ -12,6 +12,8 @@ public interface UserService {
 	public abstract void update(Long id, User updatedUser);
 
 	public abstract void create(User user);
-
-	public abstract User view(Long id);
+	
+	public abstract User findOne(Long id);
+	
+	public abstract User findByUserId(String userId);
 }

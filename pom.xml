@@ -71,10 +71,9 @@
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>	
-			<version>1.16.6</version>		
+			<artifactId>lombok</artifactId>
+			<version>1.16.6</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.webjars.bower/trumbowyg -->
 		<dependency>
 			<groupId>org.webjars.bower</groupId>
 			<artifactId>trumbowyg</artifactId>
@@ -90,6 +89,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
 </project>

@@ -28,8 +28,8 @@ public class TestUserController {
 	static UserService service;
 
 	@Autowired
-	WebApplicationContext wac;
-
+	private WebApplicationContext webContext;	
+	
 	@BeforeClass
 	public static void beforeClass() {
 		UserController controller = new UserController();
@@ -38,19 +38,21 @@ public class TestUserController {
 	}
 
 	@Before
-	public void before() {
-		mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
-
+	public void setupMockMvc() {
+		mockMvc = MockMvcBuilders.webAppContextSetup(webContext)
+						.build();
 		reset(service);
 	}
-
+	
 	@Test
-	public void UserList_StatusOK() throws Exception {
-		mockMvc.perform(get("/user")).andDo(print()).andExpect(status().isOk());
+	public void userForm() throws Exception {
+		mockMvc.perform(get("/user/form"))
+			.andExpect(status().isOk())
+			.andExpect(view().name("/user/form"));
 	}
-
+	
 	@Test
-	public void CreateUser_StatusOK() throws Exception {
+	public void createUser() throws Exception {
 		mockMvc.perform(post("/user")
 				.param("userId", "spring")
 				.param("password", "1")
@@ -60,5 +62,26 @@ public class TestUserController {
 				.andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/user"));
 
+	}
+	
+	@Test
+	public void userList() throws Exception {
+		mockMvc.perform(get("/user"))
+		.andExpect(status().isOk())
+		.andExpect(view().name("/user/list"));
+	}
+
+	@Test
+	public void updateUser_unAutenticatedUser() throws Exception {
+		mockMvc.perform(get("/user/1/form"))
+			.andExpect(status().is3xxRedirection())
+			.andExpect(view().name("redirect:/user/loginForm"));
+	}
+	
+	@Test
+	public void updateUser_AutenticatedUser() throws Exception {
+		mockMvc.perform(get("/user/1/form"))
+			.andExpect(status().is3xxRedirection())
+			.andExpect(view().name("redirect:/user/loginForm"));
 	}
 }

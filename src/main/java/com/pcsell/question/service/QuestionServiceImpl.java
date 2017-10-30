@@ -2,38 +2,44 @@ package com.pcsell.question.service;
 
 import java.util.List;
 
-import com.pcsell.question.domain.Question;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public class QuestionServiceImpl implements QuestionService {
+import com.pcsell.question.domain.Question;
+import com.pcsell.question.repository.QuestionRepository;
+
+@Service
+public class QuestionServiceImpl implements QuestionService {	
+	@Autowired
+	private QuestionRepository questionRepository;
+	
+	@Override
+	public Question findOne(Long id) {		
+		return questionRepository.findOne(id);
+	}
 
 	@Override
-	public List<Question> list() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Question> list() {		
+		return questionRepository.findAll();
 	}
 
 	@Override
 	public boolean delete(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+		Question question = questionRepository.findOne(id);
+		if(question == null){
+			return false;
+		}
+		questionRepository.delete(question);
+		return true;
 	}
 
 	@Override
-	public void update(Long id, Question updatedUser) {
-		// TODO Auto-generated method stub
-		
+	public void update(Long id, Question updatedQuestion) {
+		// TODO Auto-generated method stub		
 	}
 
 	@Override
-	public void create(Question user) {
-		// TODO Auto-generated method stub
-		
+	public void create(Question question) {
+		questionRepository.save(question);
 	}
-
-	@Override
-	public Question view(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

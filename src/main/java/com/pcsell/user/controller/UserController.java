@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pcsell.user.domain.User;
-import com.pcsell.user.repository.UserRepository;
 import com.pcsell.user.service.UserService;
 import com.pcsell.util.HttpSessionUtils;
 
@@ -19,15 +18,8 @@ import com.pcsell.util.HttpSessionUtils;
 @RequestMapping("/user")
 public class UserController {
 	@Autowired
-	private UserRepository userRepository;
-	
-	@Autowired
 	private UserService userService;
 	
-	public UserService getUserService() {
-		return userService;
-	}
-
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
@@ -61,7 +53,7 @@ public class UserController {
 			throw new IllegalStateException("잘못된 접근입니다.");
 		}
 			
-		User user = userRepository.findOne(id);		
+		User user = userService.findOne(id);		
 		model.addAttribute("user", user);
 		return "/user/updateform";
 	}
@@ -88,7 +80,7 @@ public class UserController {
 	
 	@PostMapping("/login")
 	public String Login(String userId, String password, HttpSession session) {
-		User user = userRepository.findByUserId(userId);
+		User user = userService.findByUserId(userId);
 		
 		if(user == null || !password.equals(user.getPassword())){
 			System.out.println("로그인에 실패했습니다.");

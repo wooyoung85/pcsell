@@ -11,7 +11,7 @@ public interface AnswerService {
 
 	public abstract void update(Long id, Answer updatedAnswer);
 
-	public abstract void create(Answer answer);
+	public abstract Answer create(Answer answer);
 
-	public abstract Answer view(Long id);
+	public abstract Answer findOne(Long id);
 }

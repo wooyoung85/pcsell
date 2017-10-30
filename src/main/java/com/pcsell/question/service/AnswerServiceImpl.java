@@ -2,10 +2,18 @@ package com.pcsell.question.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.pcsell.question.domain.Answer;
+import com.pcsell.question.repository.AnswerRepository;
 
+@Service
 public class AnswerServiceImpl implements AnswerService {
-
+	
+	@Autowired
+	private AnswerRepository answerRepository;
+	
 	@Override
 	public List<Answer> list() {
 		// TODO Auto-generated method stub
@@ -14,8 +22,12 @@ public class AnswerServiceImpl implements AnswerService {
 
 	@Override
 	public boolean delete(Long id) {
-		// TODO Auto-generated method stub
-		return false;
+		Answer answer = answerRepository.findOne(id);
+		if(answer == null){
+			return false;
+		}
+		answerRepository.delete(answer);
+		return true;
 	}
 
 	@Override
@@ -25,15 +37,13 @@ public class AnswerServiceImpl implements AnswerService {
 	}
 
 	@Override
-	public void create(Answer answer) {
-		// TODO Auto-generated method stub
-		
+	public Answer create(Answer answer) {
+		return answerRepository.save(answer);
 	}
 
 	@Override
-	public Answer view(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Answer findOne(Long id) {		
+		return answerRepository.findOne(id);
 	}
 
 }

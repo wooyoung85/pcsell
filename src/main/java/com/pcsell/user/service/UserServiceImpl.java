@@ -10,13 +10,9 @@ import com.pcsell.user.domain.User;
 import com.pcsell.user.repository.UserRepository;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService {	
 	@Resource
 	private UserRepository userRepository;
-
-	public UserRepository getUserRepository() {
-		return userRepository;
-	}
 
 	@Override
 	public List<User> list() {
@@ -44,10 +40,15 @@ public class UserServiceImpl implements UserService {
 	public void create(User user) {
 		userRepository.save(user);		
 	}
-
+	
 	@Override
-	public User view(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public User findOne(Long id) {		
+		return userRepository.findOne(id);
 	}
+	
+	@Override
+	public User findByUserId(String userId) {
+		return userRepository.findByUserId(userId);
+	}
+
 }
