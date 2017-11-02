@@ -28,8 +28,8 @@ public class TestUserController {
 	static UserService service;
 
 	@Autowired
-	private WebApplicationContext webContext;	
-	
+	private WebApplicationContext webContext;
+
 	@BeforeClass
 	public static void beforeClass() {
 		UserController controller = new UserController();
@@ -39,49 +39,37 @@ public class TestUserController {
 
 	@Before
 	public void setupMockMvc() {
-		mockMvc = MockMvcBuilders.webAppContextSetup(webContext)
-						.build();
+		mockMvc = MockMvcBuilders.webAppContextSetup(webContext).build();
 		reset(service);
 	}
-	
+
 	@Test
 	public void userForm() throws Exception {
-		mockMvc.perform(get("/user/form"))
-			.andExpect(status().isOk())
-			.andExpect(view().name("/user/form"));
+		mockMvc.perform(get("/user/form")).andExpect(status().isOk()).andExpect(view().name("/user/form"));
 	}
-	
+
 	@Test
 	public void createUser() throws Exception {
-		mockMvc.perform(post("/user")
-				.param("userId", "spring")
-				.param("password", "1")
-				.param("name", "spring")
-				.param("email", "spring@sk.com"))
-				.andDo(print())
-				.andExpect(status().is3xxRedirection())
+		mockMvc.perform(post("/user").param("userId", "spring").param("password", "1").param("name", "spring")
+				.param("email", "spring@sk.com")).andDo(print()).andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/user"));
 
 	}
-	
+
 	@Test
 	public void userList() throws Exception {
-		mockMvc.perform(get("/user"))
-		.andExpect(status().isOk())
-		.andExpect(view().name("/user/list"));
+		mockMvc.perform(get("/user")).andExpect(status().isOk()).andExpect(view().name("/user/list"));
 	}
 
 	@Test
 	public void updateUser_unAutenticatedUser() throws Exception {
-		mockMvc.perform(get("/user/1/form"))
-			.andExpect(status().is3xxRedirection())
-			.andExpect(view().name("redirect:/user/loginForm"));
+		mockMvc.perform(get("/user/1/form")).andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/user/loginForm"));
 	}
-	
+
 	@Test
 	public void updateUser_AutenticatedUser() throws Exception {
-		mockMvc.perform(get("/user/1/form"))
-			.andExpect(status().is3xxRedirection())
-			.andExpect(view().name("redirect:/user/loginForm"));
+		mockMvc.perform(get("/user/1/form")).andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/user/loginForm"));
 	}
 }
