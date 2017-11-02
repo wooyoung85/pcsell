@@ -30,12 +30,12 @@
 						<div class="article-util">
 							<ul class="article-util-list">
 								<li>
-									<a class="btn btn-sm btn-success pull-right" href="/question/{{id}}/form">ºˆ¡§</a>
+									<a class="btn btn-sm btn-success pull-right" href="/question/{{id}}/form">ÏàòÏ†ï</a>
 								</li>
 								<li>
 									<form class="form-delete" action="/question/{{id}}"	method="POST">
 										<input type="hidden" name="_method" value="DELETE">
-										<button class="btn btn-sm btn-danger pull-right" type="submit">ªË¡¶</button>
+										<button class="btn btn-sm btn-danger pull-right" type="submit">ÏÇ≠Ï†ú</button>
 									</form>
 								</li>								
 							</ul>
@@ -43,7 +43,7 @@
 					</article>
 					<div class="qna-comment">
 						<div class="qna-comment-slipp">
-							<p class="qna-comment-count text-right"><strong>2</strong>∞≥ ¿«∞ﬂ</p>							
+							<p class="qna-comment-count text-right"><strong>2</strong>Í∞ú ÏùòÍ≤¨</p>							
 							<div class="qna-comment-slipp-articles">
 							{{#answers}}
 								<article class="article">
@@ -62,13 +62,13 @@
 									<div class="article-util">
 										<ul class="article-util-list">
 											<li>
-												<a class="link-modify-article" href="">ºˆ¡§</a>
+												<a class="link-modify-article" href="">ÏàòÏ†ï</a>
 												<input class="hdQuestionId" type="hidden" value={{question.id}} />
 												<input class="hdId" type="hidden" value={{id}} />
 												<input class="hdContents" type="hidden" value={{contents}} />
 											</li>
 											<li>
-												<a class="link-delete-article" href="/api/question/{{question.id}}/answer/{{id}}">ªË¡¶</a>
+												<a class="link-delete-article" href="/api/question/{{question.id}}/answer/{{id}}">ÏÇ≠Ï†ú</a>
 											</li>
 										</ul>
 									</div>
@@ -77,8 +77,8 @@
 								<div class="answer-edit">
 									<form name="answer" class="answer-write" method="post" action="/api/question/{{id}}/answer">
 										<div class="form-group" style="padding: 14px; margin-bottom: 30px">
-											<textarea id="txtAnswerContents" class="form-control" name="contents" placeholder="¥‰∫Ø ¿€º∫"></textarea>
-											<input type="submit" class="btn btn-sm btn-primary pull-right" value="¥‰∫Ø«œ±‚" />
+											<textarea id="txtAnswerContents" class="form-control" name="contents" placeholder="ÎãµÎ≥Ä ÏûëÏÑ±"></textarea>
+											<input type="submit" class="btn btn-sm btn-primary pull-right" value="ÎãµÎ≥ÄÌïòÍ∏∞" />
 										</div>
 										<div class="clearfix" />
 									</form>
@@ -100,7 +100,7 @@
 	<form name="answer" class="answer-write" method="post" action="/api/question/{0}/updateAnswer/{1}">
 		<div class="form-group" style="padding: 14px; margin-bottom: 30px">
 			<textarea id="txtAnswerContents" class="form-control" name="contents">{2}</textarea>
-			<input type="submit" class="btn btn-sm btn-primary pull-right" value="ºˆ¡§«œ±‚" />
+			<input type="submit" class="btn btn-sm btn-primary pull-right" value="ÏàòÏ†ïÌïòÍ∏∞" />
 		</div>
 		<div class="clearfix" />
 	</form>
@@ -123,10 +123,10 @@
 		<div class="article-util">
 		<ul class="article-util-list">
 			<li>
-				<a class="link-modify-article" href="/api/question/{4}/updateAnswer/{5}">ºˆ¡§</a>
+				<a class="link-modify-article" href="/api/question/{4}/updateAnswer/{5}">ÏàòÏ†ï</a>
 			</li>
 			<li>
-				<a class="link-delete-article" onclick="delAnswer(this, '/api/question/{4}/answer/{5}')" href="">ªË¡¶</a>
+				<a class="link-delete-article" onclick="delAnswer(this, '/api/question/{4}/answer/{5}')" href="">ÏÇ≠Ï†ú</a>
 			</li>
 		</ul>
 		</div>
