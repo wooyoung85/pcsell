@@ -21,7 +21,7 @@ public class TestUserRepository {
 	public void insert() {
 		User createUser;
 		
-		createUser = new User("tester", "1", "테스터", "tester@sk.com");		
+		createUser = new User("tester", "1", "테스트트트트", "tester@sk.com");		
 		int size = userRepository.findAll().size();
 		
 		userRepository.save(createUser);

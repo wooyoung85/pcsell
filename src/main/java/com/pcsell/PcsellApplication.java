@@ -14,6 +14,7 @@ public class PcsellApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PcsellApplication.class, args);
 	}
+	
 	@Bean
 	public HiddenHttpMethodFilter hiddenHttpMethodFilter(){
 		HiddenHttpMethodFilter filter = new HiddenHttpMethodFilter();

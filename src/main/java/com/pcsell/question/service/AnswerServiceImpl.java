@@ -22,7 +22,7 @@ public class AnswerServiceImpl implements AnswerService {
 
 	@Override
 	public boolean delete(Long id) {
-		Answer answer = answerRepository.findOne(id);
+		Answer answer = answerRepository.findById(id).get();
 		if(answer == null){
 			return false;
 		}
@@ -43,7 +43,7 @@ public class AnswerServiceImpl implements AnswerService {
 
 	@Override
 	public Answer findOne(Long id) {		
-		return answerRepository.findOne(id);
+		return answerRepository.findById(id).get();
 	}
 
 }

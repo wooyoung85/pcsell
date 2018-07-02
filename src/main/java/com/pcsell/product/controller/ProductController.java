@@ -27,7 +27,7 @@ public class ProductController {
 	
 	@GetMapping("/{id}")
 	public String view(@PathVariable Long id, Model model){
-		model.addAttribute("product", productRepository.findOne(id));		
+		model.addAttribute("product", productRepository.findById(id).get());		
 		model.addAttribute("productCategoryList", productCategoryRepository.findAll());
 	    return "/product/view";
 	}

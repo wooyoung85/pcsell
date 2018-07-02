@@ -1,6 +1,7 @@
 package com.pcsell.question.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class QuestionServiceImpl implements QuestionService {
 	
 	@Override
 	public Question findOne(Long id) {		
-		return questionRepository.findOne(id);
+		return questionRepository.findById(id).get();
 	}
 
 	@Override
@@ -25,7 +26,7 @@ public class QuestionServiceImpl implements QuestionService {
 
 	@Override
 	public boolean delete(Long id) {
-		Question question = questionRepository.findOne(id);
+		Question question = questionRepository.findById(id).get();
 		if(question == null){
 			return false;
 		}
