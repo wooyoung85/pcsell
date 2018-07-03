@@ -22,7 +22,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.pcsell.user.service.UserService;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest()
 public class TestUserController {
 	static MockMvc mockMvc;
 	static UserService service;
