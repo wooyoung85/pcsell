@@ -21,7 +21,7 @@ public class TestUserService {
 	public void insert() {
 		User createUser;
 
-		createUser = new User("tester", "1", "테스터", "tester@sk.com");
+		createUser = new User("testUserService", "1", "테스터", "tester@sk.com");
 		int size = userService.list().size();
 
 		userService.create(createUser);

@@ -13,6 +13,7 @@ import com.pcsell.user.domain.User;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
+//@Transactional(propagation = Propagation.NOT_SUPPORTED)
 public class SpringTestUserJpa {
 	
 	@Autowired

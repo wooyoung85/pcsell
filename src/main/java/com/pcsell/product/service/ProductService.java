@@ -6,13 +6,15 @@ import com.pcsell.product.domain.Product;
 
 public interface ProductService {
 	
-	public abstract boolean createProduct();
+	public abstract boolean create();
 	
-	public abstract List<Product> retrieveProduct();
+	public abstract List<Product> list();
 	
-	public abstract boolean updateProduct();
+	public abstract Product findOne(Long id);
 	
-	public abstract boolean deleteProduct();
+	public abstract boolean update();
+	
+	public abstract boolean delete();
 }
 
 

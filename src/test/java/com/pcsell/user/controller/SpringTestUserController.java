@@ -18,6 +18,8 @@ import com.pcsell.user.service.UserService;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(UserController.class)
+/*@SpringBootTest(classes=UserController.class)
+@AutoConfigureMockMvc*/
 public class SpringTestUserController {
 
 	@MockBean
