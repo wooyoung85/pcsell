@@ -14,18 +14,20 @@ import com.pcsell.user.domain.User;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TestUserRepository {
+	
 	@Autowired
 	private UserRepository userRepository;
 	
 	@Test
 	public void insert() {
-		User createUser;
-		
-		createUser = new User("testUserRepository", "1", "테스트트트트", "tester@sk.com");		
+		User createUser = new User("testUserRepository", "1", "테스트트트트", "tester@sk.com");		
 		int size = userRepository.findAll().size();
 		
 		userRepository.save(createUser);
 		assertThat(userRepository.findAll().size(), is(size + 1));
+		
+		userRepository.delete(createUser);
+		assertThat(userRepository.findAll().size(), is(size));
 	}
 
 }
